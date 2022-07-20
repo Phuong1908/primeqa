@@ -56,8 +56,8 @@ class QuestionAnsweringSeq2SeqTrainer(Seq2SeqTrainer):
     ) -> Dict[str, float]:
         self._max_length = max_length if max_length is not None else self.args.generation_max_length
         self._num_beams = num_beams if num_beams is not None else self.args.generation_num_beams
-        self._top_k = self.args.generation_num_beams
-        self._top_p = self.args.generation_num_beams
+        self._top_k = self.args.generation_top_k
+        self._top_p = self.args.generation_top_p
 
         eval_dataset = self.eval_dataset if eval_dataset is None else eval_dataset
         eval_dataloader = self.get_eval_dataloader(eval_dataset)

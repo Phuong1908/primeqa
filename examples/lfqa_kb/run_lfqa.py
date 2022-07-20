@@ -273,7 +273,7 @@ class LFQADataArguments(DataTrainingArguments):
 class LFQATrainingArguments(Seq2SeqTrainingArguments):
 
     generation_top_k: Optional[int] = field(
-        default=None,
+        default=1,
         metadata={
             "help": (
                 "top k to use for evaluation. This argument will be passed to ``model.generate``, "
@@ -282,7 +282,7 @@ class LFQATrainingArguments(Seq2SeqTrainingArguments):
         },
     )
     generation_top_p: Optional[float] = field(
-        default=None,
+        default=0.0,
         metadata={
             "help": (
                 "top p to use for evaluation. This argument will be passed to ``model.generate``, "
@@ -606,7 +606,7 @@ def main():
         if training_args.generation_max_length is not None
         else data_args.val_max_answer_length
     )
-    num_beams = data_args.num_beams if data_args.num_beams is not None else training_args.generation_num_beams
+    num_beams = training_args.generation_num_beams
     
     if training_args.do_eval:
         logger.info("*** Evaluate ***")
